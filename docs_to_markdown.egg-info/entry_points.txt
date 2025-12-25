@@ -1,0 +1,2 @@
+[console_scripts]
+docs-to-markdown = docs_to_markdown.__main__:main
