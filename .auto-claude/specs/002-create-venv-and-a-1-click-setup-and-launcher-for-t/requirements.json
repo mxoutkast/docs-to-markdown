@@ -1,0 +1,4 @@
+{
+  "task_description": "create .venv and a 1-click-setup and launcher for the app",
+  "workflow_type": "feature"
+}

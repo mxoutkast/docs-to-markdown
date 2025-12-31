@@ -1,0 +1,317 @@
+{
+  "feature": "Create .venv and 1-Click Setup and Launcher for docs-to-markdown",
+  "workflow_type": "feature",
+  "workflow_rationale": "This is a feature addition that creates new automation scripts to enhance user experience. It does not modify existing functionality but adds setup and launch scripts. Since all scripts are independent and don't modify core code, this is a straightforward feature workflow.",
+  "phases": [
+    {
+      "id": "phase-1-setup-scripts",
+      "name": "Setup Scripts",
+      "type": "implementation",
+      "description": "Create Windows batch and PowerShell setup scripts that automate virtual environment creation and dependency installation",
+      "depends_on": [],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-1-1",
+          "description": "Create setup.bat for one-click environment setup",
+          "service": "main",
+          "files_to_modify": [],
+          "files_to_create": [
+            "setup.bat"
+          ],
+          "patterns_from": [
+            "README.md"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "setup.bat",
+            "expected": "Virtual environment created successfully and dependencies installed"
+          },
+          "status": "completed"
+        },
+        {
+          "id": "subtask-1-2",
+          "description": "Create setup.ps1 for PowerShell environment setup",
+          "service": "main",
+          "files_to_modify": [],
+          "files_to_create": [
+            "setup.ps1"
+          ],
+          "patterns_from": [
+            "README.md"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File setup.ps1",
+            "expected": "Virtual environment created successfully and dependencies installed"
+          },
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "phase-2-launcher-scripts",
+      "name": "Launcher Scripts",
+      "type": "implementation",
+      "description": "Create Windows batch and PowerShell launcher scripts that activate the virtual environment and launch the application",
+      "depends_on": [],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-2-1",
+          "description": "Create run.bat for one-click application launch",
+          "service": "main",
+          "files_to_modify": [],
+          "files_to_create": [
+            "run.bat"
+          ],
+          "patterns_from": [
+            "pyproject.toml",
+            "README.md"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "run.bat --help",
+            "expected": "Shows docs-to-markdown help output"
+          },
+          "status": "pending"
+        },
+        {
+          "id": "subtask-2-2",
+          "description": "Create run.ps1 for PowerShell application launch",
+          "service": "main",
+          "files_to_modify": [],
+          "files_to_create": [
+            "run.ps1"
+          ],
+          "patterns_from": [
+            "pyproject.toml",
+            "README.md"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File run.ps1 --help",
+            "expected": "Shows docs-to-markdown help output"
+          },
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "phase-3-documentation",
+      "name": "Documentation Update",
+      "type": "implementation",
+      "description": "Update README.md with instructions for using the new 1-click setup and launcher scripts",
+      "depends_on": [
+        "phase-1-setup-scripts",
+        "phase-2-launcher-scripts"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-3-1",
+          "description": "Update README.md with 1-click setup instructions",
+          "service": "main",
+          "files_to_modify": [
+            "README.md"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "README.md"
+          ],
+          "verification": {
+            "type": "manual",
+            "instructions": "Review README.md to verify new section exists with clear instructions for setup.bat/run.bat and setup.ps1/run.ps1"
+          },
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_phases": 3,
+    "total_subtasks": 5,
+    "services_involved": [
+      "main"
+    ],
+    "parallelism": {
+      "max_parallel_phases": 2,
+      "parallel_groups": [
+        {
+          "phases": [
+            "phase-1-setup-scripts",
+            "phase-2-launcher-scripts"
+          ],
+          "reason": "Both phases create independent scripts with no dependencies between them"
+        }
+      ],
+      "recommended_workers": 2,
+      "speedup_estimate": "1.5x faster than sequential"
+    },
+    "startup_command": "source .venv/bin/activate && python auto-claude/run.py --spec 002 --parallel 2"
+  },
+  "verification_strategy": {
+    "risk_level": "low",
+    "skip_validation": false,
+    "minimal_mode": true,
+    "test_creation_phase": "post_implementation",
+    "test_types_required": [
+      "unit"
+    ],
+    "security_scanning_required": false,
+    "staging_deployment_required": false,
+    "acceptance_criteria": [
+      "Setup scripts create .venv and install all dependencies",
+      "Launcher scripts activate venv and launch application",
+      "All scripts include helpful error messages and user feedback",
+      "README.md is updated with 1-click setup instructions",
+      "Scripts handle common edge cases (existing .venv, missing Python, etc.)",
+      "No console errors during normal operation"
+    ],
+    "verification_steps": [
+      {
+        "name": "Setup Script Test",
+        "command": "setup.bat",
+        "expected_outcome": "Creates .venv directory, installs all packages from requirements.txt, installs package in editable mode, shows success message",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "Launcher Script Test",
+        "command": "run.bat --help",
+        "expected_outcome": "Activates venv, runs docs-to-markdown --help, displays usage information",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "PowerShell Setup Test",
+        "command": "powershell -ExecutionPolicy Bypass -File setup.ps1",
+        "expected_outcome": "Same as setup.bat - creates venv and installs dependencies",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "PowerShell Launcher Test",
+        "command": "powershell -ExecutionPolicy Bypass -File run.ps1 --help",
+        "expected_outcome": "Same as run.bat - activates venv and runs application",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "Documentation Review",
+        "command": "type README.md",
+        "expected_outcome": "README contains new section with 1-click setup instructions",
+        "type": "manual",
+        "required": true,
+        "blocking": false
+      }
+    ],
+    "reasoning": "Low risk automation that doesn't modify core application code. Minimal validation with manual testing of scripts on target platforms is sufficient. No security concerns as scripts only create venv and run existing application."
+  },
+  "qa_acceptance": {
+    "unit_tests": {
+      "required": false,
+      "commands": [],
+      "minimum_coverage": null,
+      "notes": "Scripts are not unit-testable in traditional sense; manual verification is appropriate"
+    },
+    "integration_tests": {
+      "required": true,
+      "commands": [],
+      "services_to_test": [
+        "main"
+      ],
+      "tests": [
+        {
+          "name": "Setup script creates .venv",
+          "description": "Verify setup.bat/setup.ps1 creates virtual environment directory",
+          "manual": true
+        },
+        {
+          "name": "Setup installs dependencies",
+          "description": "Verify all packages from requirements.txt are installed in .venv",
+          "manual": true
+        },
+        {
+          "name": "Setup installs package",
+          "description": "Verify docs-to-markdown command is available in .venv",
+          "manual": true
+        },
+        {
+          "name": "Launcher activates venv",
+          "description": "Verify application runs using venv Python",
+          "manual": true
+        }
+      ]
+    },
+    "e2e_tests": {
+      "required": true,
+      "commands": [],
+      "flows": [
+        {
+          "name": "New user onboarding",
+          "steps": [
+            "Clone repository",
+            "Double-click setup.bat",
+            "Wait for completion",
+            "Double-click run.bat"
+          ],
+          "expected_outcome": "Application launches successfully and shows usage/help"
+        },
+        {
+          "name": "Convert documents",
+          "steps": [
+            "Run setup",
+            "Create test docx file",
+            "Run run.bat with input and output paths"
+          ],
+          "expected_outcome": "Documents converted successfully to markdown"
+        }
+      ]
+    },
+    "browser_verification": {
+      "required": false,
+      "pages": [],
+      "notes": "CLI application - no browser verification needed"
+    },
+    "database_verification": {
+      "required": false,
+      "checks": [],
+      "notes": "No database used"
+    },
+    "script_verification": {
+      "required": true,
+      "scripts": [
+        {
+          "name": "setup.bat",
+          "command": "setup.bat",
+          "expected_behavior": "Creates .venv, installs dependencies, shows success message"
+        },
+        {
+          "name": "run.bat",
+          "command": "run.bat \"input\" \"output\"",
+          "expected_behavior": "Activates venv, runs conversion, shows results"
+        },
+        {
+          "name": "setup.ps1",
+          "command": ".\\setup.ps1",
+          "expected_behavior": "Same as setup.bat with PowerShell features"
+        },
+        {
+          "name": "run.ps1",
+          "command": ".\\run.ps1 \"input\" \"output\"",
+          "expected_behavior": "Same as run.bat with PowerShell features"
+        }
+      ]
+    }
+  },
+  "qa_signoff": null,
+  "status": "in_progress",
+  "planStatus": "in_progress",
+  "updated_at": "2025-12-31T23:43:50.340Z",
+  "recoveryNote": "Task recovered from stuck state at 2025-12-31T23:43:50.340Z"
+}

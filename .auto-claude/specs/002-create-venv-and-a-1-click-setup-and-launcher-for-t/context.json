@@ -1,0 +1,42 @@
+{
+  "task_description": "create .venv and a 1-click-setup and launcher for the app",
+  "scoped_services": ["main"],
+  "files_to_modify": {
+    "main": ["README.md"]
+  },
+  "files_to_create": {
+    "main": [
+      "setup.bat",
+      "run.bat",
+      "setup.ps1",
+      "run.ps1"
+    ]
+  },
+  "files_to_reference": {
+    "main": [
+      "requirements.txt",
+      "pyproject.toml",
+      "README.md"
+    ]
+  },
+  "patterns": {
+    "venv_setup": "Use 'python -m venv .venv' for cross-platform compatibility",
+    "venv_activation": "Activate using Scripts\\Activate.ps1 on Windows",
+    "dependency_installation": "Install from requirements.txt using 'python -m pip install -r requirements.txt'",
+    "package_installation": "Install in editable mode using 'python -m pip install -e .'",
+    "console_script": "Package exposes 'docs-to-markdown' console script from pyproject.toml",
+    "entry_point": "Main entry point is docs_to_markdown.__main__:main"
+  },
+  "existing_implementations": {
+    "description": "No existing setup or launcher scripts found. Manual setup is documented in README.md.",
+    "relevant_files": ["README.md"],
+    "note": "The package structure is already set up with console script entry point in pyproject.toml"
+  },
+  "technology_stack": {
+    "language": "Python 3.9+",
+    "package_manager": "pip",
+    "testing_framework": "pytest",
+    "platform": "Windows (primary), PowerShell and Batch scripts"
+  },
+  "created_at": "2026-01-01T07:39:06.446079"
+}

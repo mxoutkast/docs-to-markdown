@@ -1,0 +1,56 @@
+{
+  "project_root": "D:\\docs-to-markdown",
+  "project_type": "single",
+  "services": {
+    "main": {
+      "name": "main",
+      "path": ".",
+      "language": "Python",
+      "framework": null,
+      "type": "cli_application",
+      "package_manager": "pip",
+      "port": null,
+      "dev_command": "python -m docs_to_markdown",
+      "test_command": "pytest",
+      "key_directories": {
+        "source": {
+          "path": "docs_to_markdown",
+          "purpose": "Application source code"
+        },
+        "tests": {
+          "path": "tests",
+          "purpose": "Test suite"
+        },
+        "venv": {
+          "path": ".venv",
+          "purpose": "Python virtual environment"
+        }
+      },
+      "dependencies": [
+        "mammoth==1.10.0",
+        "markdownify==0.14.1",
+        "beautifulsoup4==4.12.3",
+        "lxml==5.3.0"
+      ],
+      "testing": "pytest",
+      "test_directory": "tests",
+      "console_scripts": {
+        "docs-to-markdown": "docs_to_markdown.__main__:main"
+      },
+      "entry_point": "docs_to_markdown.__main__:main"
+    }
+  },
+  "infrastructure": {
+    "docker": false,
+    "database": false,
+    "ci_cd": false
+  },
+  "conventions": {
+    "linter": null,
+    "formatter": null,
+    "testing": "pytest",
+    "version_control": "git",
+    "venv_location": ".venv",
+    "package_installation": "pip install -e ."
+  }
+}

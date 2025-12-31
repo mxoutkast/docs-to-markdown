@@ -1,0 +1,18 @@
+{
+  "sourceType": "manual",
+  "model": "glm-4-7",
+  "thinkingLevel": "medium",
+  "isAutoProfile": true,
+  "phaseModels": {
+    "spec": "glm-4-7",
+    "planning": "glm-4-7",
+    "coding": "glm-4-7",
+    "qa": "glm-4-7"
+  },
+  "phaseThinking": {
+    "spec": "ultrathink",
+    "planning": "high",
+    "coding": "low",
+    "qa": "low"
+  }
+}
