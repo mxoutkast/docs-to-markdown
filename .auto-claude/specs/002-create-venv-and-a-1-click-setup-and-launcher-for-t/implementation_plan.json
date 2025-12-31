@@ -123,7 +123,7 @@
             "type": "manual",
             "instructions": "Review README.md to verify new section exists with clear instructions for setup.bat/run.bat and setup.ps1/run.ps1"
           },
-          "status": "pending"
+          "status": "completed"
         }
       ]
     }
@@ -310,8 +310,8 @@
     }
   },
   "qa_signoff": null,
-  "status": "in_progress",
-  "planStatus": "in_progress",
-  "updated_at": "2025-12-31T23:43:50.340Z",
+  "status": "completed",
+  "planStatus": "completed",
+  "updated_at": "2026-01-01T08:10:00.000Z",
   "recoveryNote": "Task recovered from stuck state at 2025-12-31T23:43:50.340Z"
 }

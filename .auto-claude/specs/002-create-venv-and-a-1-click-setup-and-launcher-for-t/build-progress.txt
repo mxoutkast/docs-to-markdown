@@ -275,3 +275,76 @@ Next Steps:
 - Update README.md with 1-click setup instructions
 
 === END SESSION 5 ===
+
+=== SESSION 6 (Implementation - Subtask 3-1) ===
+Started: 2026-01-01T08:10:00Z
+
+Subtask: subtask-3-1 - Update README.md with 1-click setup instructions
+Status: COMPLETED
+
+Implementation Details:
+- Updated README.md with comprehensive 1-click setup instructions
+- Changes made:
+  * Added "Quick Start (1-Click Setup)" section at the top after "What it does"
+  * Provided clear instructions for both Windows batch and PowerShell users
+  * Included example usage for both setup methods
+  * Listed what the setup scripts do automatically
+  * Reorganized "Install" section to offer 1-click setup as Option 1 (Recommended)
+  * Kept manual setup as Option 2 for advanced users/non-Windows platforms
+  * Updated "Usage" section to prioritize launcher scripts (Option 1)
+  * Kept command-line direct usage as Option 2
+  * Added comprehensive "Troubleshooting" section covering:
+    - Setup script issues (Python not found, existing .venv, permissions, network errors)
+    - Launcher script issues (missing .venv, activation failures, application errors)
+    - PowerShell execution policy issues with workarounds
+
+Key Features:
+- Clear, step-by-step instructions for both batch and PowerShell users
+- Emphasizes 1-click setup as the recommended approach
+- Maintains backward compatibility with manual setup instructions
+- Comprehensive troubleshooting section covering common issues
+- Consistent formatting and style with existing README content
+- All code blocks use proper syntax highlighting (powershell)
+
+Verification:
+- Manual review of README.md confirmed:
+  * Quick Start section is prominently placed and easy to follow
+  * Instructions for both setup.bat/setup.ps1 and run.bat/run.ps1 are clear
+  * Example usage provided for both methods
+  * Install section properly organized with 1-click as recommended option
+  * Usage section prioritizes launcher scripts while keeping CLI options
+  * Troubleshooting section covers all common scenarios
+  * PowerShell execution policy issues addressed with solutions
+- All links and paths are accurate
+- Formatting is consistent with existing README style
+
+Quality Checklist:
+- [x] Follows patterns from reference files (README.md)
+- [x] No console.log/print debugging statements
+- [x] Error handling in place (documented in troubleshooting)
+- [x] Verification passes (manual review completed)
+- [x] Clean commit with descriptive message
+
+Git Commit:
+- Commit hash: 096f3d9
+- Message: "auto-claude: subtask-3-1 - Update README.md with 1-click setup instructions"
+
+Files Modified:
+- Modified: README.md (added 114 lines, reorganized sections)
+
+Implementation Plan Status:
+- All 5 subtasks completed
+- All 3 phases completed
+- Overall status: COMPLETED
+
+Project Summary:
+- Created setup.bat: Windows batch setup script with comprehensive error handling
+- Created setup.ps1: PowerShell setup script with colored output and advanced features
+- Created run.bat: Windows batch launcher script with argument forwarding
+- Created run.ps1: PowerShell launcher script with colored output
+- Updated README.md: Added 1-click setup instructions and troubleshooting guide
+
+All deliverables complete and verified.
+
+=== END SESSION 6 ===
+
