@@ -74,7 +74,7 @@
             "command": "run.bat --help",
             "expected": "Shows docs-to-markdown help output"
           },
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "subtask-2-2",

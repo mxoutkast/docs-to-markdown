@@ -157,3 +157,121 @@ Next Steps:
 - Both launcher scripts can be done in parallel
 
 === END SESSION 3 ===
+
+=== SESSION 4 (Implementation - Subtask 2-1) ===
+Started: 2026-01-01T08:00:00Z
+
+Subtask: subtask-2-1 - Create run.bat for one-click application launch
+Status: COMPLETED
+
+Implementation Details:
+- Created run.bat with comprehensive one-click launcher functionality
+- Script features:
+  * Checks if virtual environment exists (.venv directory)
+  * Provides clear error message if .venv not found (directs user to run setup.bat)
+  * Activates virtual environment using .venv\Scripts\activate.bat
+  * Runs docs-to-markdown console script with all arguments passed to run.bat
+  * Properly handles exit codes from the application
+  * Displays error message and pauses if application exits with non-zero code
+  * Includes pause at end for user to review output
+  * Uses %* to pass all command-line arguments to docs-to-markdown
+  * Follows same pattern and style as setup.bat
+
+Key Features:
+- Error handling for missing virtual environment
+- Exit code propagation from docs-to-markdown application
+- User-friendly error messages
+- Proper argument forwarding (supports all docs-to-markdown options)
+- Consistent with setup.bat style and structure
+
+Verification:
+- Command: run.bat --help
+- Result: SUCCESS - Shows docs-to-markdown help output with all available options
+- Script correctly activates venv and runs the console script
+- All command-line arguments are properly forwarded
+- Error handling tested (when .venv doesn't exist)
+
+Quality Checklist:
+- [x] Follows patterns from reference files (setup.bat, pyproject.toml)
+- [x] No console.log/print debugging statements
+- [x] Error handling in place (missing .venv check, exit code handling)
+- [x] Verification passes (run.bat --help shows correct output)
+- [x] Clean commit with descriptive message
+
+Git Commit:
+- Commit hash: bf71f70
+- Message: "auto-claude: subtask-2-1 - Create run.bat for one-click application launch"
+
+Files Modified:
+- Created: run.bat (35 lines)
+
+Next Steps:
+- Continue with subtask-2-2: Create run.ps1 for PowerShell application launch
+- Or continue with phase-3: Documentation Update (after all launcher scripts are complete)
+
+=== END SESSION 4 ===
+
+=== SESSION 5 (Implementation - Subtask 2-2) ===
+Started: 2026-01-01T08:05:00Z
+
+Subtask: subtask-2-2 - Create run.ps1 for PowerShell application launch
+Status: COMPLETED
+
+Implementation Details:
+- Created run.ps1 with comprehensive PowerShell launcher functionality
+- Script features:
+  * Checks if virtual environment exists (.venv directory)
+  * Provides clear error message if .venv not found (directs user to run setup.ps1)
+  * Activates virtual environment using .venv\Scripts\Activate.ps1
+  * Runs docs-to-markdown console script with all arguments passed to run.ps1
+  * Properly handles exit codes from the application
+  * Displays error message and pauses if application exits with non-zero code
+  * Includes Read-Host at end for user to review output
+  * Uses @args to pass all command-line arguments to docs-to-markdown
+  * Follows same pattern and style as setup.ps1
+
+Key Features:
+- Error handling for missing virtual environment
+- Exit code propagation from docs-to-markdown application
+- User-friendly error messages with colored output
+- Proper argument forwarding (supports all docs-to-markdown options)
+- Consistent with setup.ps1 style and structure
+- Uses PowerShell-specific syntax (Write-Host with colors, try/catch, etc.)
+- Uses $PSScriptRoot for script directory reference (no hardcoded paths)
+- Colored output for better user experience (Cyan for headers, Yellow for progress, Red for errors)
+
+Key Differences from run.bat:
+- Uses PowerShell-specific syntax (Write-Host with colors, try/catch, etc.)
+- Uses $PSScriptRoot instead of %~dp0
+- Uses if/else control flow instead of goto labels
+- More sophisticated error handling with try/catch blocks
+- Colored output for better user experience
+- Uses @args instead of %* for argument forwarding
+- Uses $LASTEXITCODE instead of %errorlevel%
+
+Verification:
+- Command: powershell -ExecutionPolicy Bypass -File run.ps1 --help
+- Result: SUCCESS - Shows docs-to-markdown help output with all available options
+- Script correctly activates venv and runs the console script
+- All command-line arguments are properly forwarded
+- Error handling tested (when .venv doesn't exist)
+
+Quality Checklist:
+- [x] Follows patterns from reference files (setup.ps1, pyproject.toml)
+- [x] No console.log/print debugging statements
+- [x] Error handling in place (missing .venv check, exit code handling)
+- [x] Verification passes (run.ps1 --help shows correct output)
+- [x] Clean commit with descriptive message
+
+Git Commit:
+- Commit hash: [pending]
+- Message: "auto-claude: subtask-2-2 - Create run.ps1 for PowerShell application launch"
+
+Files Modified:
+- Created: run.ps1 (64 lines)
+
+Next Steps:
+- Continue with phase-3: Documentation Update (subtask-3-1)
+- Update README.md with 1-click setup instructions
+
+=== END SESSION 5 ===
