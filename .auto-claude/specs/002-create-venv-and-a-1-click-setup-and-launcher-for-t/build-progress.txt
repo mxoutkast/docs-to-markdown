@@ -264,7 +264,7 @@ Quality Checklist:
 - [x] Clean commit with descriptive message
 
 Git Commit:
-- Commit hash: [pending]
+- Commit hash: 783dccd
 - Message: "auto-claude: subtask-2-2 - Create run.ps1 for PowerShell application launch"
 
 Files Modified:

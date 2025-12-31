@@ -93,7 +93,7 @@
             "command": "powershell -ExecutionPolicy Bypass -File run.ps1 --help",
             "expected": "Shows docs-to-markdown help output"
           },
-          "status": "pending"
+          "status": "completed"
         }
       ]
     },
