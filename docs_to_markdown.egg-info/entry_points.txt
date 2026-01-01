@@ -1,2 +1,3 @@
 [console_scripts]
 docs-to-markdown = docs_to_markdown.__main__:main
+docs-to-markdown-gui = docs_to_markdown.gui:main

@@ -40,11 +40,21 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Overwrite existing .md files.",
     )
+    parser.add_argument(
+        "--gui",
+        action="store_true",
+        help="Launch GUI for file/folder selection.",
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
+
+    # Launch GUI if --gui flag is set
+    if args.gui:
+        from .gui import main as gui_main
+        return gui_main(argv)
 
     output_dir = args.output_dir or (args.input_dir / "markdown")
 
