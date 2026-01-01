@@ -327,3 +327,24 @@ code block
     assert "- List item 1" in rendered
     assert ">" in rendered
     assert "```" in rendered
+
+
+def test_copy_preview_has_method() -> None:
+    """Test that _copy_preview method exists."""
+    gui = DocsToMarkdownGUI()
+    assert hasattr(gui, "_copy_preview")
+    assert callable(getattr(gui, "_copy_preview"))
+
+
+def test_current_markdown_text_initialized() -> None:
+    """Test that _current_markdown_text is initialized."""
+    gui = DocsToMarkdownGUI()
+    assert hasattr(gui, "_current_markdown_text")
+    assert isinstance(gui._current_markdown_text, str)
+
+
+def test_copy_button_exists() -> None:
+    """Test that copy button is created in preview section."""
+    gui = DocsToMarkdownGUI()
+    assert hasattr(gui, "_copy_btn")
+    assert gui._copy_btn is not None

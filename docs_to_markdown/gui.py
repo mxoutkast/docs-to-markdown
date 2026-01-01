@@ -148,6 +148,7 @@ class DocsToMarkdownGUI:
         self._overwrite: bool = False
         self._conversion_thread: threading.Thread | None = None
         self._stop_conversion = threading.Event()
+        self._current_markdown_text: str = ""
 
         # Build UI
         self._setup_layout()
@@ -312,6 +313,9 @@ class DocsToMarkdownGUI:
             # Read markdown content
             md_text = md_path.read_text(encoding="utf-8")
 
+            # Store the original markdown text for copy functionality
+            self._current_markdown_text = md_text
+
             # Render markdown with proper formatting
             formatted_text = self._render_markdown(md_text)
 
@@ -325,6 +329,38 @@ class DocsToMarkdownGUI:
             messagebox.showerror(
                 "Error",
                 f"Failed to preview file: {e}",
+            )
+
+    def _copy_preview(self) -> None:
+        """
+        Copy the current markdown content to the system clipboard.
+        """
+        try:
+            # Check if there is markdown content to copy
+            if not self._current_markdown_text:
+                messagebox.showinfo(
+                    "Info",
+                    "No markdown content to copy. Please preview a file first.",
+                )
+                return
+
+            # Clear the clipboard and append the markdown text
+            self._root.clipboard_clear()
+            self._root.clipboard_append(self._current_markdown_text)
+
+            # Update the clipboard to ensure the content is available
+            self._root.update()
+
+            # Show confirmation message
+            messagebox.showinfo(
+                "Success",
+                "Markdown content copied to clipboard!",
+            )
+
+        except Exception as e:
+            messagebox.showerror(
+                "Error",
+                f"Failed to copy to clipboard: {e}",
             )
 
     def _setup_layout(self) -> None:
@@ -536,7 +572,7 @@ class DocsToMarkdownGUI:
         """Create markdown preview section with file browser."""
         preview_frame = ctk.CTkFrame(self._main_frame)
         preview_frame.grid(row=6, column=0, sticky="nsew", pady=(0, 10))
-        preview_frame.grid_rowconfigure(1, weight=1)  # Make preview textbox expand
+        preview_frame.grid_rowconfigure(3, weight=1)  # Make preview textbox expand
         preview_frame.grid_columnconfigure(0, weight=1)
 
         preview_label = ctk.CTkLabel(
@@ -564,12 +600,24 @@ class DocsToMarkdownGUI:
         )
         self._files_listbox.pack(fill="x", padx=5, pady=5)
 
+        # Copy button frame
+        copy_button_frame = ctk.CTkFrame(preview_frame)
+        copy_button_frame.grid(row=2, column=0, sticky="ew", padx=10, pady=(0, 5))
+
+        self._copy_btn = ctk.CTkButton(
+            copy_button_frame,
+            text="Copy to Clipboard",
+            command=self._copy_preview,
+            width=200,
+        )
+        self._copy_btn.pack(side="right", padx=10, pady=5)
+
         # Preview textbox
         self._preview_text = ctk.CTkTextbox(
             preview_frame,
             height=200,
         )
-        self._preview_text.grid(row=2, column=0, sticky="nsew", padx=10, pady=(0, 10))
+        self._preview_text.grid(row=3, column=0, sticky="nsew", padx=10, pady=(0, 10))
         self._preview_text.insert("1.0", "Preview converted markdown here...")
         self._preview_text.configure(state="disabled")
 
