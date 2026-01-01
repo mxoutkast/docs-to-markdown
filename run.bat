@@ -25,7 +25,14 @@ if %errorlevel% neq 0 (
 )
 
 REM Run docs-to-markdown with all arguments
-docs-to-markdown %*
+REM If no arguments provided, default to GUI mode
+if "%~1"=="" (
+    echo No arguments provided. Launching GUI mode...
+    echo.
+    docs-to-markdown --gui
+) else (
+    docs-to-markdown %*
+)
 
 REM Check exit code
 if %errorlevel% neq 0 (

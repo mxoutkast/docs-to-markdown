@@ -14,7 +14,9 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "input_dir",
+        nargs="?",  # Make optional
         type=Path,
+        default=None,
         help="Folder containing .doc/.docx files.",
     )
     parser.add_argument(
@@ -55,6 +57,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.gui:
         from .gui import main as gui_main
         return gui_main(argv)
+    
+    # If not in GUI mode, input_dir is required
+    if args.input_dir is None:
+        _build_parser().error("the following arguments are required: input_dir")
+
 
     output_dir = args.output_dir or (args.input_dir / "markdown")
 

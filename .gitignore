@@ -5,3 +5,5 @@ __pycache__/
 markdown/
 .worktrees/
 .auto-claude/
+.auto-claude-security.json
+.auto-claude-status

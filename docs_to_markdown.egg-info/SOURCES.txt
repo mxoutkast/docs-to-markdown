@@ -3,6 +3,7 @@ pyproject.toml
 docs_to_markdown/__init__.py
 docs_to_markdown/__main__.py
 docs_to_markdown/converter.py
+docs_to_markdown/gui.py
 docs_to_markdown/py.typed
 docs_to_markdown.egg-info/PKG-INFO
 docs_to_markdown.egg-info/SOURCES.txt
@@ -11,3 +12,4 @@ docs_to_markdown.egg-info/entry_points.txt
 docs_to_markdown.egg-info/requires.txt
 docs_to_markdown.egg-info/top_level.txt
 tests/test_discovery.py
+tests/test_gui.py

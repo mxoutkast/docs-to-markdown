@@ -19,5 +19,10 @@ dependencies = [
 docs-to-markdown = "docs_to_markdown.__main__:main"
 docs-to-markdown-gui = "docs_to_markdown.gui:main"
 
+[tool.setuptools]
+packages.find.where = ["."]
+packages.find.include = ["docs_to_markdown*"]
+packages.find.exclude = ["test_manual*", "tests*", ".worktrees*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

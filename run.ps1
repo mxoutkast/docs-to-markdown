@@ -38,11 +38,18 @@ else {
 }
 
 # Run docs-to-markdown with all arguments
-$argsString = $args -join " "
-Write-Host "Running: docs-to-markdown $argsString" -ForegroundColor Yellow
-Write-Host ""
-
-& docs-to-markdown @args
+# If no arguments provided, default to GUI mode
+if ($args.Count -eq 0) {
+    Write-Host "No arguments provided. Launching GUI mode..." -ForegroundColor Yellow
+    Write-Host ""
+    & docs-to-markdown --gui
+}
+else {
+    $argsString = $args -join " "
+    Write-Host "Running: docs-to-markdown $argsString" -ForegroundColor Yellow
+    Write-Host ""
+    & docs-to-markdown @args
+}
 
 # Check exit code
 if ($LASTEXITCODE -ne 0) {
